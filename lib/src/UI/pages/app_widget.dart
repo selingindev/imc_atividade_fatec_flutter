@@ -10,10 +10,10 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 0, 0, 0)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo home Page'),
+      home: const MyHomePage(title: 'IMC VIEW'),
     );
   }
 }

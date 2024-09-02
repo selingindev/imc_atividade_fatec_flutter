@@ -12,11 +12,14 @@ class ButtonVallueWidget extends StatelessWidget {
         width: 80,
         height: 80,
         margin: const EdgeInsets.all(10),
+        
         child: Center(
-          child: Text(
-            number,
-            style: TextStyle(color: Colors.white, fontSize: fontSize),
+          child: TextButton(
+            child:Text( number,
+            style: TextStyle(color: Colors.white, fontSize: fontSize),),
+          onPressed: () {print(number);  }, 
           ),
-        ));
+        ))
+        ;
   }
 }

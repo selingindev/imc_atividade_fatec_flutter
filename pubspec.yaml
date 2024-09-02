@@ -60,9 +60,7 @@ flutter:
 
 
   assets:
-    - assets/images/gatonormal.jpg
-    - assets/images/gordao.jpg
-    - assets/images/magro.jpg
+   - assets/images/gatonormal.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

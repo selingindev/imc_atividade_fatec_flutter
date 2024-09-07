@@ -35,12 +35,10 @@ class _MyHomePageState extends State<MyHomePage> {
 void _removerValor() {
   setState(() {
     if (campoSelecionado == 'peso') {
-      // Remove o último caractere do texto do controlador de peso
       if (_controllerPES.text.isNotEmpty) {
         _controllerPES.text = _controllerPES.text.substring(0, _controllerPES.text.length - 1);
       }
     } else if (campoSelecionado == 'altura') {
-      // Remove o último caractere do texto do controlador de altura
       if (_controllerALT.text.isNotEmpty) {
         _controllerALT.text = _controllerALT.text.substring(0, _controllerALT.text.length - 1);
       }

@@ -3,7 +3,7 @@ import 'package:imc_atividade_fatec_flutter/src/UI/widgets/button_vallue_widget.
 
 class ContainerButtonsWidgets extends StatefulWidget {
   final void Function(String) onTapAdicionar;
-  final void Function(String) onTapRemover;
+  final void Function() onTapRemover;
 
   const ContainerButtonsWidgets({super.key, 
     required this.onTapAdicionar,
@@ -31,7 +31,7 @@ class _ContainerButtonsWidgetsState extends State<ContainerButtonsWidgets> {
                   Expanded(child: ButtonVallueWidget('7', onTap: () => widget.onTapAdicionar('7'))),
                   Expanded(child: ButtonVallueWidget('8', onTap: () => widget.onTapAdicionar('8'))),
                   Expanded(child: ButtonVallueWidget('9', onTap: () => widget.onTapAdicionar('9'))),
-                  Expanded(child: ButtonVallueWidget('-', onTap: () => widget.onTapRemover('-'), cfontSize: 16.0)),
+                  Expanded(child: ButtonVallueWidget('-', onTap: () => widget.onTapRemover(), cfontSize: 16.0)),
                 ],
               ),
             ),

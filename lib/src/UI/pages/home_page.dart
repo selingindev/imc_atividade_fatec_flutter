@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
   }
-void _removerValor(String valor) {
+void _removerValor() {
   setState(() {
     if (campoSelecionado == 'peso') {
       // Remove o último caractere do texto do controlador de peso

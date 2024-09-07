@@ -1,25 +1,40 @@
 import 'package:flutter/material.dart';
 
 class ButtonVallueWidget extends StatelessWidget {
-  const ButtonVallueWidget(this.number, this.value, {super.key, double? cfontSize,}): fontSize = cfontSize ?? 30;
-  final double fontSize;
-  final String number;
-  final int? value;
+  final String label;
+
+  final double cfontSize;
+  final VoidCallback? onTap;
+
+  const ButtonVallueWidget(
+    this.label, {
+    this.cfontSize = 24.0, // Define um tamanho de fonte padrão
+    this.onTap, // Função de callback para ação ao pressionar
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.blue,
-        width: 80,
-        height: 80,
-        margin: const EdgeInsets.all(10),
-        
-        child: Center(
-          child: TextButton(
-            child:Text( number,
-            style: TextStyle(color: Colors.white, fontSize: fontSize),),
-          onPressed: () {print(number);  }, 
+    return  GestureDetector(
+        onTap: onTap, // Quando o botão for pressionado, chama o callback
+        child: Container(
+          margin: const EdgeInsets.all(2.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          decoration: BoxDecoration(
+            color: Colors.blueAccent,
+            borderRadius: BorderRadius.circular(8.0),
           ),
-        ))
-        ;
+          child: Center(
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: cfontSize,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+    );
   }
 }

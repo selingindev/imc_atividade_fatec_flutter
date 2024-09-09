@@ -18,13 +18,14 @@ class InputWidget extends StatelessWidget {
       onTap: onTap,
       child: AbsorbPointer(
         child: Container(
-          margin: const EdgeInsets.only(top: 16),
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          margin: const EdgeInsets.only(top: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: TextField(
             controller: controller,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               labelText: tipoData,
+              
             ),
           ),
         ),

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class TextWidget extends StatelessWidget {
-  const TextWidget({super.key});
+  final String text;
+  const TextWidget({super.key, required this.text});
   
   @override
   Widget build(BuildContext context) {
-   return const Text('O resultado do calculo é:',
-   style: TextStyle(fontSize: 20),
+   return Text(text,
+   style:  const TextStyle(fontSize: 20),
    );
   }
 }

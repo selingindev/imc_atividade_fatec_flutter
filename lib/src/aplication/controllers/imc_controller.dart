@@ -11,16 +11,18 @@ class ImcController {
   ImcController(this.calculateImcUsecase);
 
   double? calculeIMC(){
+    
     try{
       double weightDoubleController = double.parse(controllerALT.text);
       double heightDoubleController = double.parse(controllerPES.text);
-      log(weightDoubleController);
-
-            
+       if (weightDoubleController > 3.5) {
+      weightDoubleController = weightDoubleController / 100;  // Converte para metros
+    }
+     log(weightDoubleController);
       return calculateImcUsecase.executeCount(weightDoubleController, heightDoubleController);
 
     }catch (e){
-      print('erro ao calcular');
+      
       return null;
     }
   }

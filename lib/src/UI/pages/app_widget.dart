@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:imc_atividade_fatec_flutter/src/UI/pages/home_page.dart';
+import 'package:imc_atividade_fatec_flutter/src/aplication/controllers/imc_controller.dart';
+
+
 
 class AppWidget extends StatelessWidget {
-  const AppWidget({super.key});
+    final ImcController controller;
+    
+  const AppWidget({super.key, required this.controller});
+  
 
   // This widget is the root of your application.
   @override
@@ -13,7 +19,7 @@ class AppWidget extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 0, 0, 0)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'IMC VIEW'),
+      home: MyHomePage(title: 'IMC VIEW', controller: controller),
     );
   }
 }

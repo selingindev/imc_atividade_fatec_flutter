@@ -16,13 +16,14 @@ class ButtonVallueWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  GestureDetector(
+        
         onTap: onTap, // Quando o botão for pressionado, chama o callback
         child: Container(
-          margin: const EdgeInsets.all(2.0),
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          margin: const EdgeInsets.all(10.0),
           decoration: BoxDecoration(
-            color: Colors.blueAccent,
+            color: const Color.fromARGB(255, 129, 3, 3),
             borderRadius: BorderRadius.circular(8.0),
+            
           ),
           child: Center(
             child: Text(

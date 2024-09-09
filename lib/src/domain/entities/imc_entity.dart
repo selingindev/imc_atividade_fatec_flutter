@@ -2,7 +2,7 @@ class ImcEntity {
   final double height;
   final double weight;
 
-  ImcEntity(this.height, this.weight);
+  ImcEntity({required this.height, required this.weight});
 
   double calculateIMC (){
     return weight / (height * height);

@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:imc_atividade_fatec_flutter/src/UI/widgets/container_buttons_widgets.dart';
 import 'package:imc_atividade_fatec_flutter/src/UI/widgets/input_widget.dart';
 import 'package:imc_atividade_fatec_flutter/src/UI/widgets/text_widget.dart';
+import 'package:imc_atividade_fatec_flutter/src/aplication/controllers/imc_controller.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.controller, required this.title});
   final String title;
+  final ImcController controller;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final TextEditingController _controllerALT = TextEditingController();
-  final TextEditingController _controllerPES = TextEditingController();
-
+  double? imcResult;
   String campoSelecionado = '';
 
   void _selecionarCampo(String campo) {
@@ -26,25 +26,43 @@ class _MyHomePageState extends State<MyHomePage> {
   void _adicionarValor(String valor) {
     setState(() {
       if (campoSelecionado == 'peso') {
-        _controllerPES.text += valor;
+        widget.controller.controllerPES.text += valor;
       } else if (campoSelecionado == 'altura') {
-        _controllerALT.text += valor;
+        widget.controller.controllerALT.text += valor;
       }
     });
   }
-void _removerValor() {
-  setState(() {
-    if (campoSelecionado == 'peso') {
-      if (_controllerPES.text.isNotEmpty) {
-        _controllerPES.text = _controllerPES.text.substring(0, _controllerPES.text.length - 1);
+
+  void _removerValor() {
+    setState(() {
+      if (campoSelecionado == 'peso') {
+        if (widget.controller.controllerPES.text.isNotEmpty) {
+          widget.controller.controllerPES.text = widget
+              .controller.controllerPES.text
+              .substring(0, widget.controller.controllerPES.text.length - 1);
+        }
+      } else if (campoSelecionado == 'altura') {
+        if (widget.controller.controllerALT.text.isNotEmpty) {
+          widget.controller.controllerALT.text = widget
+              .controller.controllerALT.text
+              .substring(0, widget.controller.controllerALT.text.length - 1);
+        }
       }
-    } else if (campoSelecionado == 'altura') {
-      if (_controllerALT.text.isNotEmpty) {
-        _controllerALT.text = _controllerALT.text.substring(0, _controllerALT.text.length - 1);
+    });
+  }
+  
+
+  void _calculate() {
+    setState(() {
+      if (widget.controller.controllerALT.text.isNotEmpty &&
+          widget.controller.controllerPES.text.isNotEmpty) {
+        imcResult = widget.controller.calculeIMC();
+   
+      } else {
+        
       }
-    }
-  });
-}
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,35 +85,39 @@ void _removerValor() {
               flex: 2,
               child: Image(
                 image: AssetImage("assets/images/gatonormal.jpg"),
+                ),
+            ),
+            Expanded(
+              flex: 1,
+              child: InputWidget(
+                controller: widget.controller.controllerPES,
+                onTap: () => _selecionarCampo('peso'),
+                tipoData: 'Peso',
               ),
             ),
             Expanded(
               flex: 1,
               child: InputWidget(
-                controller: _controllerPES,
-                onTap: () => _selecionarCampo('peso'), tipoData: 'Peso',
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: InputWidget(
-                controller: _controllerALT,
+                controller: widget.controller.controllerALT,
                 onTap: () => _selecionarCampo('altura'),
-                   tipoData: 'Altura',
+                tipoData: 'Altura',
               ),
             ),
-            const Expanded(
+            Expanded(
               flex: 1,
-              child: TextWidget(),
+              child: Text(
+                imcResult != null
+                    ? "Seu IMC é: ${imcResult!.toStringAsFixed(2)}"
+                    : "Calcule o seu IMC",
+              ),
             ),
             Expanded(
-              flex: 3,
-              child:ContainerButtonsWidgets(
-  onTapAdicionar: _adicionarValor,
-  onTapRemover: _removerValor,
-)
-
-            ),
+                flex: 3,
+                child: ContainerButtonsWidgets(
+                  onTapAdicionar: _adicionarValor,
+                  onTapRemover: _removerValor,
+                  onTapOperation: _calculate,
+                )),
           ],
         ),
       ),

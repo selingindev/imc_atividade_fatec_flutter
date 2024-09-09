@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imc_atividade_fatec_flutter/src/UI/widgets/button_vallue_widget.dart';
 
-import 'package:imc_atividade_fatec_flutter/src/aplication/controllers/imc_controller.dart';
-
 class ContainerButtonsWidgets extends StatefulWidget {
   final void Function(String) onTapAdicionar;
   final void Function() onTapRemover;
@@ -25,79 +23,82 @@ class _ContainerButtonsWidgetsState extends State<ContainerButtonsWidgets> {
     return Center(
       child: SizedBox(
         width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                      child: ButtonVallueWidget('7',
-                          onTap: () => widget.onTapAdicionar('7'))),
-                  Expanded(
-                      child: ButtonVallueWidget('8',
-                          onTap: () => widget.onTapAdicionar('8'))),
-                  Expanded(
-                      child: ButtonVallueWidget('9',
-                          onTap: () => widget.onTapAdicionar('9'))),
-                  Expanded(
-                      child: ButtonVallueWidget('-',
-                          onTap: () => widget.onTapRemover(), cfontSize: 16.0)),
-                ],
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        child: ButtonVallueWidget('7',
+                            onTap: () => widget.onTapAdicionar('7'))),
+                    Expanded(
+                        child: ButtonVallueWidget('8',
+                            onTap: () => widget.onTapAdicionar('8'))),
+                    Expanded(
+                        child: ButtonVallueWidget('9',
+                            onTap: () => widget.onTapAdicionar('9'))),
+                    Expanded(
+                        child: ButtonVallueWidget('-',
+                            onTap: () => widget.onTapRemover(), cfontSize: 16.0)),
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                      child: ButtonVallueWidget('4',
-                          onTap: () => widget.onTapAdicionar('4'))),
-                  Expanded(
-                      child: ButtonVallueWidget('5',
-                          onTap: () => widget.onTapAdicionar('5'))),
-                  Expanded(
-                      child: ButtonVallueWidget('6',
-                          onTap: () => widget.onTapAdicionar('6'))),
-                  Expanded(
-                      child: ButtonVallueWidget('.',
-                          onTap: () => widget.onTapAdicionar('.'))),
-                ],
+              Expanded(
+                flex: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        child: ButtonVallueWidget('4',
+                            onTap: () => widget.onTapAdicionar('4'))),
+                    Expanded(
+                        child: ButtonVallueWidget('5',
+                            onTap: () => widget.onTapAdicionar('5'))),
+                    Expanded(
+                        child: ButtonVallueWidget('6',
+                            onTap: () => widget.onTapAdicionar('6'))),
+                    Expanded(
+                        child: ButtonVallueWidget('.',
+                            onTap: () => widget.onTapAdicionar('.'))),
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                      child: ButtonVallueWidget('1',
-                          onTap: () => widget.onTapAdicionar('1'))),
-                  Expanded(
-                      child: ButtonVallueWidget('2',
-                          onTap: () => widget.onTapAdicionar('2'))),
-                  Expanded(
-                      child: ButtonVallueWidget('3',
-                          onTap: () => widget.onTapAdicionar('3'))),
-                  Expanded(
-                      child: ButtonVallueWidget('0',
-                          onTap: () => widget.onTapAdicionar('0'))),
-                  Expanded(
-                    child: ButtonVallueWidget(
-                      'ENTER',
-                      onTap: () {
-                        widget.onTapOperation(); // Chama o callback
-                      },
-                      cfontSize: 16.0,
+              Expanded(
+                flex: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        child: ButtonVallueWidget('1',
+                            onTap: () => widget.onTapAdicionar('1'))),
+                    Expanded(
+                        child: ButtonVallueWidget('2',
+                            onTap: () => widget.onTapAdicionar('2'))),
+                    Expanded(
+                        child: ButtonVallueWidget('3',
+                            onTap: () => widget.onTapAdicionar('3'))),
+                    Expanded(
+                        child: ButtonVallueWidget('0',
+                            onTap: () => widget.onTapAdicionar('0'))),
+                    Expanded(
+                      child: ButtonVallueWidget(
+                        'ENTER',
+                        onTap: () {
+                          widget.onTapOperation(); // Chama o callback
+                        },
+                        cfontSize: 16.0,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

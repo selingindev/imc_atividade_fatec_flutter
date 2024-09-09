@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imc_atividade_fatec_flutter/src/UI/widgets/container_buttons_widgets.dart';
 import 'package:imc_atividade_fatec_flutter/src/UI/widgets/input_widget.dart';
-import 'package:imc_atividade_fatec_flutter/src/UI/widgets/text_widget.dart';
 import 'package:imc_atividade_fatec_flutter/src/aplication/controllers/imc_controller.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -16,10 +15,25 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   double? imcResult;
   String campoSelecionado = '';
+  String fotoPeso = 'assets/images/fofinho.png';
 
   void _selecionarCampo(String campo) {
     setState(() {
       campoSelecionado = campo;
+    });
+  }
+
+  void _trocarFoto() {
+    setState(() {
+      if (imcResult! > 30.0) {
+        fotoPeso = 'assets/images/gatogordao.jpg';
+      } else if (imcResult! > 25.0) {
+        fotoPeso = 'assets/images/gordao.jpg';
+      } else if (imcResult! > 18.5) {
+        fotoPeso = 'assets/images/gatonormal.jpg';
+      } else {
+        fotoPeso = 'assets/images/magro.jpg';
+      }
     });
   }
 
@@ -50,17 +64,14 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
   }
-  
 
   void _calculate() {
     setState(() {
       if (widget.controller.controllerALT.text.isNotEmpty &&
           widget.controller.controllerPES.text.isNotEmpty) {
         imcResult = widget.controller.calculeIMC();
-   
-      } else {
-        
-      }
+        _trocarFoto();
+      } else {}
     });
   }
 
@@ -81,11 +92,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Expanded(
+            Expanded(
               flex: 2,
               child: Image(
-                image: AssetImage("assets/images/gatonormal.jpg"),
-                ),
+                image: AssetImage(fotoPeso),
+              ),
             ),
             Expanded(
               flex: 1,

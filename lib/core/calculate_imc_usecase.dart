@@ -1,7 +1,7 @@
-import 'package:imc_atividade_fatec_flutter/src/domain/repositories/imc_repository.dart';
+import 'package:imc_atividade_fatec_flutter/src/domain/interfaces/imc_repository_interface.dart';
 
 class CalculateImcUsecase {
-  final ImcRepository _repository;
+  final IImcRepository _repository;
 
   CalculateImcUsecase(this._repository);
 

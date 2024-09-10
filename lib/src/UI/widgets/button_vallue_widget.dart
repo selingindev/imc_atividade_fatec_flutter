@@ -22,7 +22,7 @@ class ButtonVallueWidget extends StatelessWidget {
           margin: const EdgeInsets.all(10.0),
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 129, 3, 3),
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.circular(20.0),
             
           ),
           child: Center(

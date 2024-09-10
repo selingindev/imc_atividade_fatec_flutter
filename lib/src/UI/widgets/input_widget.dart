@@ -18,7 +18,7 @@ class InputWidget extends StatelessWidget {
       onTap: onTap,
       child: AbsorbPointer(
         child: Container(
-          margin: const EdgeInsets.only(top: 30),
+          margin: const EdgeInsets.only(top: 50.0),
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: TextField(
             controller: controller,

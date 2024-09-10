@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imc_atividade_fatec_flutter/src/UI/widgets/container_buttons_widgets.dart';
 import 'package:imc_atividade_fatec_flutter/src/UI/widgets/input_widget.dart';
+import 'package:imc_atividade_fatec_flutter/src/UI/widgets/text_widget.dart';
 import 'package:imc_atividade_fatec_flutter/src/aplication/controllers/imc_controller.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -94,8 +95,11 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Expanded(
               flex: 2,
-              child: Image(
-                image: AssetImage(fotoPeso),
+              child: Container(
+                margin: const EdgeInsets.only(top: 10.0),
+                child: Image(
+                  image: AssetImage(fotoPeso),
+                ),
               ),
             ),
             Expanded(
@@ -116,10 +120,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Expanded(
               flex: 1,
-              child: Text(
-                imcResult != null
-                    ? "Seu IMC é: ${imcResult!.toStringAsFixed(2)}"
-                    : "Calcule o seu IMC",
+              child: Center(
+                child: TextWidget(
+                  imcResult != null
+                      ? "Seu IMC é: ${imcResult!.toStringAsFixed(2)}"
+                      : "Calcule o seu IMC",
+                ),
               ),
             ),
             Expanded(

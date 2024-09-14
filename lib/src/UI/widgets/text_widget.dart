@@ -6,8 +6,12 @@ class TextWidget extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-   return Text(text,
-   style:  const TextStyle(fontSize: 20),
+   return Padding(
+    padding: EdgeInsets.symmetric(horizontal: 16),
+     child: Text(text,
+     style:  const TextStyle(fontSize: 20),
+     textAlign: TextAlign.center,
+     ),
    );
   }
 }

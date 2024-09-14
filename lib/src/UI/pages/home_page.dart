@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
         
         textPeso = 'Magreza Grau 2 ';
       }
-      else if(imcResult! <= 16){
+      else if(imcResult! >= 0.1){
       fotoPeso = 'assets/images/gatomuitomagro.jpg'; 
       
         textPeso = 'Magreza Grau 3 ';
@@ -205,7 +205,7 @@ void _calculate() {
                       ? "Calcule o seu IMC"
                       : imcResult != 0 ?
                         "Seu IMC é: ${imcResult!.toStringAsFixed(2)}"
-                      : "Impossível IMC calcular, digite um valor diferente de 0"
+                      : "Impossível calcular o IMC, digite um valor diferente de 0"
                 ),
               ),
             ),

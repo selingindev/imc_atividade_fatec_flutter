@@ -66,15 +66,21 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _calculate() {
+ void _calculate() {
     setState(() {
       if (widget.controller.controllerALT.text.isNotEmpty &&
           widget.controller.controllerPES.text.isNotEmpty) {
         imcResult = widget.controller.calculeIMC();
         _trocarFoto();
-      } else {}
+      }  else if (widget.controller.controllerPES.text.isEmpty){
+        campoSelecionado = 'peso';
+       }
+       else if(widget.controller.controllerALT.text.isEmpty){
+        campoSelecionado = 'altura';
+      }
     });
-  }
+}
+ 
 
   @override
   Widget build(BuildContext context) {

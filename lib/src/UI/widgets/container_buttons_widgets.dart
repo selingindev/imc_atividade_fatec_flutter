@@ -24,7 +24,7 @@ class _ContainerButtonsWidgetsState extends State<ContainerButtonsWidgets> {
       child: SizedBox(
         width: double.infinity,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.0),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

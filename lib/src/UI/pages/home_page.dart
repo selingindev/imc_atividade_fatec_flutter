@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:imc_atividade_fatec_flutter/src/UI/widgets/container_buttons_widgets.dart';
 import 'package:imc_atividade_fatec_flutter/src/UI/widgets/input_widget.dart';
 import 'package:imc_atividade_fatec_flutter/src/UI/widgets/text_widget.dart';
+import 'package:imc_atividade_fatec_flutter/src/UI/widgets/toast_menssage_widget.dart';
 import 'package:imc_atividade_fatec_flutter/src/aplication/controllers/imc_controller.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -15,14 +16,39 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   double? imcResult;
-  String campoSelecionado = '';
+  String _campoSelecionado = '';
   String fotoPeso = 'assets/images/fofinho.png';
+   late FocusNode _pesoFocusNode;
+   late FocusNode _alturaFocusNode;
 
-  void _selecionarCampo(String campo) {
-    setState(() {
-      campoSelecionado = campo;
+     @override
+  void initState() {
+    super.initState();
+    _pesoFocusNode = FocusNode();
+    _alturaFocusNode = FocusNode();
+
+    _pesoFocusNode.addListener(() {
+      if (_pesoFocusNode.hasFocus) {
+        setState(() {
+          _campoSelecionado = 'peso';
+        });
+      }
+    });
+
+    _alturaFocusNode.addListener(() {
+      if (_alturaFocusNode.hasFocus) {
+        setState(() {
+          _campoSelecionado = 'altura';
+        });
+      }
     });
   }
+  //LOGICA que nao vale apena por conta do focus do input.
+  //void _selecionarCampo(String campo) {
+    //setState(() {
+      //campoSelecionado = campo;
+    //});
+  //}
 
   void _trocarFoto() {
     setState(() {
@@ -32,31 +58,43 @@ class _MyHomePageState extends State<MyHomePage> {
         fotoPeso = 'assets/images/gordao.jpg';
       } else if (imcResult! > 18.5) {
         fotoPeso = 'assets/images/gatonormal.jpg';
-      } else {
+      } else if (imcResult! > 0.1) {
         fotoPeso = 'assets/images/magro.jpg';
+      }
+      else{
+        fotoPeso = 'assets/images/fofinho.png';
       }
     });
   }
 
   void _adicionarValor(String valor) {
     setState(() {
-      if (campoSelecionado == 'peso') {
-        widget.controller.controllerPES.text += valor;
-      } else if (campoSelecionado == 'altura') {
-        widget.controller.controllerALT.text += valor;
+      if (_campoSelecionado == 'peso') {
+        if (valor == '.' && widget.controller.controllerPES.text.length != 2) {
+          return ToastMessageWidget.show(context, 'Impossível adicionar um "." nesta posição');
+        } else {
+          widget.controller.controllerPES.text += valor;
+        }
+      } 
+      else if (_campoSelecionado == 'altura') {
+        if (valor == '.' && widget.controller.controllerALT.text.length != 1) {
+          return ToastMessageWidget.show(context, 'Impossível adicionar um "." nesta posição'); // Se já tiver um ponto, não adiciona outro
+        } else {
+          widget.controller.controllerALT.text += valor;
+        }
       }
     });
   }
 
   void _removerValor() {
     setState(() {
-      if (campoSelecionado == 'peso') {
+      if (_campoSelecionado == 'peso') {
         if (widget.controller.controllerPES.text.isNotEmpty) {
           widget.controller.controllerPES.text = widget
               .controller.controllerPES.text
               .substring(0, widget.controller.controllerPES.text.length - 1);
         }
-      } else if (campoSelecionado == 'altura') {
+      } else if (_campoSelecionado == 'altura') {
         if (widget.controller.controllerALT.text.isNotEmpty) {
           widget.controller.controllerALT.text = widget
               .controller.controllerALT.text
@@ -66,21 +104,22 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
- void _calculate() {
-    setState(() {
-      if (widget.controller.controllerALT.text.isNotEmpty &&
-          widget.controller.controllerPES.text.isNotEmpty) {
-        imcResult = widget.controller.calculeIMC();
-        _trocarFoto();
-      }  else if (widget.controller.controllerPES.text.isEmpty){
-        campoSelecionado = 'peso';
-       }
-       else if(widget.controller.controllerALT.text.isEmpty){
-        campoSelecionado = 'altura';
-      }
-    });
+void _calculate() {
+  setState(() {
+    if (widget.controller.controllerALT.text.isNotEmpty &&
+        widget.controller.controllerPES.text.isNotEmpty) {
+      imcResult = widget.controller.calculeIMC();
+      _trocarFoto();
+    } else if (widget.controller.controllerPES.text.isEmpty) {
+      _campoSelecionado = 'peso';
+      _pesoFocusNode.requestFocus();
+    } else if (widget.controller.controllerALT.text.isEmpty) {
+      _campoSelecionado = 'altura';
+      _alturaFocusNode.requestFocus();
+    }
+  });
 }
- 
+
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
               flex: 1,
               child: InputWidget(
                 controller: widget.controller.controllerPES,
-                onTap: () => _selecionarCampo('peso'),
+                focusNode: _pesoFocusNode,
                 tipoData: 'Peso',
               ),
             ),
@@ -120,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
               flex: 1,
               child: InputWidget(
                 controller: widget.controller.controllerALT,
-                onTap: () => _selecionarCampo('altura'),
+                focusNode: _alturaFocusNode,
                 tipoData: 'Altura',
               ),
             ),
@@ -128,9 +167,11 @@ class _MyHomePageState extends State<MyHomePage> {
               flex: 1,
               child: Center(
                 child: TextWidget(
-                  imcResult != null
-                      ? "Seu IMC é: ${imcResult!.toStringAsFixed(2)}"
-                      : "Calcule o seu IMC",
+                  imcResult == null
+                      ? "Calcule o seu IMC"
+                      : imcResult != 0 ?
+                        "Seu IMC é: ${imcResult!.toStringAsFixed(2)}"
+                      : "Impossível IMC calcular, digite um valor diferente de 0"
                 ),
               ),
             ),

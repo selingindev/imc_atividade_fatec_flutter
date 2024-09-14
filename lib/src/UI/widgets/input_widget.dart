@@ -1,35 +1,31 @@
 import 'package:flutter/material.dart';
-
 class InputWidget extends StatelessWidget {
   final TextEditingController controller;
   final String tipoData;
-  final VoidCallback onTap;
+  final FocusNode focusNode;
 
   const InputWidget({
     required this.tipoData,
     required this.controller,
-    required this.onTap,
-    super.key,
+    super.key, required this.focusNode
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: AbsorbPointer(
-        child: Container(
+    return   Container(
           margin: const EdgeInsets.only(top: 50.0),
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: TextField(
+           child: TextField(
             controller: controller,
+            focusNode: focusNode,
+                readOnly: true,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               labelText: tipoData,
-              
+
             ),
           ),
-        ),
-      ),
-    );
+        );
   }
 }
+

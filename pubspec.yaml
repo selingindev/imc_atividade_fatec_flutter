@@ -65,7 +65,12 @@ flutter:
    - assets/images/gatogordao.jpg
    - assets/images/gordao.jpg
    - assets/images/magro.jpg
+   - assets/images/gatomagro.jpg
+   - assets/images/obesidadesevera1.jpg
+   - assets/images/obesidadesevera2.jpg
    - assets/images/fofinho.png
+   - assets/images/gatomuitomagro.jpg
+   
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

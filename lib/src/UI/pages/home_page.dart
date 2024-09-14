@@ -18,6 +18,7 @@ class _MyHomePageState extends State<MyHomePage> {
   double? imcResult;
   String _campoSelecionado = '';
   String fotoPeso = 'assets/images/fofinho.png';
+  String textPeso = '';
    late FocusNode _pesoFocusNode;
    late FocusNode _alturaFocusNode;
 
@@ -52,17 +53,44 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _trocarFoto() {
     setState(() {
-      if (imcResult! > 30.0) {
+        if (imcResult! >= 40.0) {
         fotoPeso = 'assets/images/gatogordao.jpg';
-      } else if (imcResult! > 25.0) {
+        textPeso = 'Obesidade muito Severa';
+      }
+      else if(imcResult! >= 35){
+      fotoPeso = 'assets/images/obesidadesevera1.jpg';
+        textPeso = 'Obesidade Severa ';
+      }
+      else if (imcResult! >= 30.0) {
+      fotoPeso = 'assets/images/obesidadesevera2.jpg';
+      
+        textPeso = 'Obesidade Moderada';
+      } else if (imcResult! >= 25.0) {
         fotoPeso = 'assets/images/gordao.jpg';
-      } else if (imcResult! > 18.5) {
+        
+        textPeso = 'Pré-Obesidade';
+      } else if (imcResult! >= 18.5) {
         fotoPeso = 'assets/images/gatonormal.jpg';
-      } else if (imcResult! > 0.1) {
+        
+        textPeso = 'Eutrofia (Ideal)';
+      } else if (imcResult! >= 17.0) {
+        fotoPeso = 'assets/images/gatomagro.jpg';
+        
+        textPeso = 'Magreza Grau 1 ';
+      }else if(imcResult! >= 16.0 ){
         fotoPeso = 'assets/images/magro.jpg';
+        
+        textPeso = 'Magreza Grau 2 ';
+      }
+      else if(imcResult! <= 16){
+      fotoPeso = 'assets/images/gatomuitomagro.jpg'; 
+      
+        textPeso = 'Magreza Grau 3 ';
       }
       else{
         fotoPeso = 'assets/images/fofinho.png';
+        
+        textPeso = '';
       }
     });
   }
@@ -142,11 +170,17 @@ void _calculate() {
               flex: 2,
               child: Container(
                 margin: const EdgeInsets.only(top: 10.0),
-                child: Image(
+                child:
+                 Image(
                   image: AssetImage(fotoPeso),
                 ),
               ),
             ),
+            Expanded(
+              flex: 1,
+              child: TextWidget(
+                textPeso
+              )),
             Expanded(
               flex: 1,
               child: InputWidget(

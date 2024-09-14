@@ -30,7 +30,7 @@ class ToastMessageWidget {
     overlay.insert(overlayEntry);
 
     // Remover o overlay após um tempo
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       overlayEntry.remove();
     });
   }
